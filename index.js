@@ -1,3 +1,4 @@
+"use strict"
 let list = {
     //initializing project  with ajax returned data and 'ul' appending on DOM
     init: function () {
@@ -8,9 +9,10 @@ let list = {
                 }))
             }
         })
-        let result = [];
-        let self = this;
-        let ul = document.createElement('ul');
+        
+        let result = []
+        let self = this
+        let ul = document.createElement('ul')
         document.body.appendChild(ul)
         $.getJSON('data.json', function (data) {
             for (let i in data.games) {
@@ -20,25 +22,30 @@ let list = {
                     }
                 }
             }
-        });
+        })
     },
     //appending list and casting data inside list
     appendElem: function (self, ul, data, result) {
-        let val =1
         let li = document.createElement('li')
         let form = document.createElement('form')
         li.innerHTML = data.question
         li.appendChild(form)
         ul.appendChild(li)
         form.innerHTML = Handlebars.compile(document.getElementById('template').innerHTML)(data)
+        this.prepareResult(form,data,result)
+        $(li).filter(':nth-child(n+2)').hide()
+    },
+    prepareResult: function (form, data, result) {
         form.addEventListener('submit', function (e) {
             e.preventDefault()
-            $(this).parent('li').fadeOut(300)
+            let li = $(this).parent('li')
+            li.fadeOut(300)
+            li.next().fadeIn(300)
             if (data.correct == ($(form).serializeArray()[0].value)) {
                 result.push(1)
             } else { result.push(0) }
         })
-    },
+    }
 }
 
 
