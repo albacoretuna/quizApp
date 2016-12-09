@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        li {
+            padding: 5px;
+            text-align: left;
+            width: 800px;
+            margin: 20px auto;
+            box-shadow: -2px 5px 5px -5px #a1a190
+
+        }
+        body,html {
+            margin: 0;
+            padding: 0;
+        }
+        input[type="radio"]{
+            display: none;
+            padding: 5px
+        }
+        input[type="radio"]:checked + span{
+            border: 1px solid red;
+            
+        }
+         input[type="radio"] + span{
+            display: inline-block;
+            padding: 5px;
+            margin: 1px
+            
+        }
+    </style>
+</head>
+<body>
+    <button id="result">Result</button>
+
+    <script src="node_modules/handlebars/dist/handlebars.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="index.js"></script>
+    <template type='text/x-handlebars-template' id='template'>
+        {{#with content}}
+       <label> <input type="radio" value=0 name={{this.[0]}} checked><span>{{this.[0]}}</span> </label> <br/> 
+       <label> <input type="radio" value=1 name={{this.[0]}}><span>{{this.[1]}}</span> </label> <br/> 
+       <label> <input type="radio" value=2 name={{this.[0]}}><span>{{this.[2]}}</span> </label> <br/> 
+       <label> <input type="radio" value=3 name={{this.[0]}}><span>{{this.[3]}}</span> </label> <br/> 
+       <label> <input type="submit">
+        {{/with}}
+    </template>
+</body>
+</html> 
